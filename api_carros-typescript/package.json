@@ -1,0 +1,20 @@
+{
+  "name": "trabalho-semestre",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "carro": "npx tsx watch src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "tsx": "^3.12.6",
+    "typescript": "^5.0.4"
+  }
+}
