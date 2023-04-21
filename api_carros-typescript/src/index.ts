@@ -14,6 +14,11 @@ npm i prisma -D
 npm i typescript -D
 npm i @types/express -D
 
+
+teste 
+npm install swagger-jsdoc swagger-ui-express
+
+
 Comando prisma
 
 Informa o banco de dados
@@ -26,12 +31,19 @@ Inciar o prisma
 npx prisma studio
 */
 
-import express from "express";
+import swaggerUi from 'swagger-ui-express';
+import { swaggerSpec } from '../swaggerOptions';
+import express, { Router } from "express";
+import { router } from "./router/carros_router"
 const app = express();
 const port = 3000;
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+app.use(router);
 
 app.listen(port, ()=> {
     console.log(`O servidor de PRODUTO foi subido na porta ${port}`);
