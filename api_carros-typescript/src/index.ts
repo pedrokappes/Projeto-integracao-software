@@ -33,9 +33,10 @@ npx prisma studio
 
 A fazer
 
-1-verificar campos POST swagger
-2-Calcular preco
-3-Verificar vagas
+1-verificar campos POST swagger -> matheus
+2-Calcular preco -> Maicon
+3-Verificar vagas -> Maicon
+4-Api externa, achar placa de carro -> Pedro
 */
 
 import swaggerUi from 'swagger-ui-express';
@@ -53,5 +54,5 @@ app.use(express.urlencoded({extended: true}));
 app.use(router);
 
 app.listen(port, ()=> {
-    console.log(`O servidor de PRODUTO foi subido na porta ${port}`);
+    console.log(`O servidor de CARROS esta rodando na porta ${port}`);
 });

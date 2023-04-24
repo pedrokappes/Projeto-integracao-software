@@ -8,10 +8,12 @@ app.py
 
 Falta fazer
 
-1-Adcionar um banco de dados
-2-Validação de campos de cadastrar
-3-Swagger
-3-Axios link externo
+1-Axios link externo -> Se não conseguir de placa de carro
+2-Swagger -> Se der tempo
+3-Adcionar um banco de dados -> Se der tempo
+4-Validação de campos de cadastrar -> Se der tempo
+
+
 
 """
 from flask import Flask, request
