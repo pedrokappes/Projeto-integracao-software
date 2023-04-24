@@ -1,12 +1,11 @@
-import { Response } from 'express';
-import { Request } from 'express';
+import { Response, Request } from 'express';
 import { CarroBD } from '../data/carros_repository';
 import { Carro } from '../models/carro.models';
+import { AxiosCliente } from '../axiosCliente/axiosCliente';
 
 const carroBD = new CarroBD();
 
 export class CarroController {
-
     async paginaInicial(request: Request, response: Response) {
         response.json('Pagina inicial');
     }
@@ -33,13 +32,30 @@ export class CarroController {
 
     async Cadastrarcarro(request: Request, response: Response) {
         let carro: Carro = request.body;
-        carro = await carroBD.cadastrar(carro);
+        if ("clienteId" in carro) {
 
-        return response.status(200).json({
-            message: "Produto cadastrado",
-            data: carro
-        });
+            const axiosCliente = new AxiosCliente()
+            const {mensagem} = await axiosCliente.buscar(carro)
+            if (mensagem) {
+                if (mensagem === "OK") {
+                    carro = await carroBD.cadastrar(carro);
 
+                    return response.status(200).json({
+                        message: "Produto cadastrado",
+                        data: carro
+                    });
+                } 
+            }
+            return response.status(200).json({
+                message: "Verifique a Api/Id de cliente(s)",
+            });
+
+        }
+        else {
+            return response.status(200).json({
+                message: "Favor informe o id do cliente"
+            });
+        }
     }
     async Alterarcarro(request: Request, response: Response) {
         const carro: Carro = request.body;
@@ -64,7 +80,7 @@ export class CarroController {
 
         if (!carro) {
             return response.status(200).json({
-                 mensagem: "Nenhum produto encontrado" 
+                mensagem: "Nenhum produto encontrado"
             });
         }
         return response.status(200).json({

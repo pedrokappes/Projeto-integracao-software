@@ -11,8 +11,8 @@ datasource db {
 }
 
 model Carro {
-  id Int @id @default(autoincrement())
-  placa String
-  modelo String
-  idCliente Int
+        id Int @id @default(autoincrement())
+        placa String
+        modelo String
+        clienteId Int
 }

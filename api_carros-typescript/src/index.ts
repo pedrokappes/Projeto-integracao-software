@@ -7,6 +7,7 @@ Prisma
 
 Dependencias
 npm i express
+npm i axios
 
 Dependencias desemvolvedor
 npm i tsx -D
