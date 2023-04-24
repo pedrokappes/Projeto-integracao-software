@@ -16,7 +16,6 @@ npm i typescript -D
 npm i @types/express -D
 
 
-teste 
 npm install swagger-jsdoc swagger-ui-express
 
 
@@ -30,6 +29,13 @@ npx prisma migrate dev --name init
 
 Inciar o prisma
 npx prisma studio
+
+
+A fazer
+
+1-verificar campos POST swagger
+2-Calcular preco
+3-Verificar vagas
 */
 
 import swaggerUi from 'swagger-ui-express';
@@ -37,7 +43,7 @@ import { swaggerSpec } from '../swaggerOptions';
 import express, { Router } from "express";
 import { router } from "./router/carros_router"
 const app = express();
-const port = 3000;
+const port = 3000; 
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
@@ -47,5 +53,5 @@ app.use(express.urlencoded({extended: true}));
 app.use(router);
 
 app.listen(port, ()=> {
-    console.log(`O servidor de PRODUTO esta rodando na porta ${port}`);
+    console.log(`O servidor de PRODUTO foi subido na porta ${port}`);
 });

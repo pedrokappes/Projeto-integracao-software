@@ -4,6 +4,15 @@ pip install Flask
 
 Criar arquivo
 app.py
+
+
+Falta fazer
+
+1-Adcionar um banco de dados
+2-Validação de campos de cadastrar
+3-Swagger
+3-Axios link externo
+
 """
 from flask import Flask, request
 from db.cliente_db import Banco
