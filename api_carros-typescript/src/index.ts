@@ -47,5 +47,5 @@ app.use(express.urlencoded({extended: true}));
 app.use(router);
 
 app.listen(port, ()=> {
-    console.log(`O servidor de PRODUTO foi subido na porta ${port}`);
+    console.log(`O servidor de PRODUTO esta rodando na porta ${port}`);
 });
