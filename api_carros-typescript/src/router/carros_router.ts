@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { Request, Response } from "express";
-import { CarroController } from "../controllers/carros_controller";
+import { CarroController } from "../controllers/carro_controller";
 import { ServicoController } from "../controllers/servicos_controller";
 
 const router: Router = Router();
@@ -15,9 +15,7 @@ const router: Router = Router();
  *         description: Pagina inicial.
  */
 
-router.get("/", (req: Request, res: Response) => {
-    res.json('Pagina inicial')
-});
+router.get("/", new CarroController().paginaInicial);
 
 /**
  * @swagger
@@ -28,7 +26,7 @@ router.get("/", (req: Request, res: Response) => {
  *       200:
  *         description: Lista de carros.
  */
-router.get("/carro/id", new CarroController().Listarcarros);
+router.get("/carro", new CarroController().Listarcarros);
 
 /**
  * @swagger
@@ -39,7 +37,7 @@ router.get("/carro/id", new CarroController().Listarcarros);
  *       200:
  *         description: carro com placa/id escolhido.
  */
-router.get("/carro", new CarroController().Buscarcarro);
+router.get("/carro/:id", new CarroController().Buscarcarro);
 
 /**
  * @swagger
@@ -61,7 +59,7 @@ router.post("/carro", new CarroController().Cadastrarcarro);
  *       200:
  *         description: Alterado com sucesso!
  */
-router.put("/carro/id", new CarroController().Alterarcarro);
+router.put("/carro/:id", new CarroController().Alterarcarro);
 
 /**
  * @swagger
@@ -72,7 +70,7 @@ router.put("/carro/id", new CarroController().Alterarcarro);
  *       200:
  *         description: Deletado com sucesso.
  */
-router.delete("/carro/id", new CarroController().Deletarcarro);
+router.delete("/carro/:id", new CarroController().Deletarcarro);
 
 /**
  * @swagger
