@@ -33,10 +33,11 @@ npx prisma studio
 
 A fazer
 
-1-verificar campos POST swagger -> matheus
-2-Calcular preco -> Maicon
-3-Verificar vagas -> Maicon
-4-Api externa, achar placa de carro -> Pedro
+prioridades:
+1- Calcular preco -> Maicon
+2- Verificar vagas -> Maicon
+3- Api externa, achar placa de carro ou cep -> Pedro
+4- Tratamento de erros nas requisições e alteração nas mensagens (atualmente só retorna cód 200) -> SE POSSÍVEL
 */
 
 import swaggerUi from 'swagger-ui-express';

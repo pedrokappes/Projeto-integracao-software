@@ -4,17 +4,6 @@ import { CarroController } from "../controllers/carro_controller";
 import { ServicoController } from "../controllers/servicos_controller";
 
 const router: Router = Router();
-
-/**
- * @swagger
- * /:
- *   get:
- *     summary: Pagina inicial.
- *     responses:
- *       200:
- *         description: Pagina inicial.
- */
-
 router.get("/", new CarroController().paginaInicial);
 
 /**
@@ -30,12 +19,19 @@ router.get("/carro", new CarroController().Listarcarros);
 
 /**
  * @swagger
- * /BuscarCarro:
+ * /Carro/{id}:
  *   get:
- *     summary: Retorna o carro baseado na placa/id.
+ *     summary: Retorna o carro baseado no id.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID do carro a ser retornado.
  *     responses:
  *       200:
- *         description: carro com placa/id escolhido.
+ *         description: Carro com o ID escolhido.
  */
 router.get("/carro/:id", new CarroController().Buscarcarro);
 
@@ -44,6 +40,22 @@ router.get("/carro/:id", new CarroController().Buscarcarro);
  * /Carro:
  *   post:
  *     summary: Cadastra um carro novo.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           example:
+ *             placa: abc-12345
+ *             modelo: Uno
+ *             clienteId: 1
+ *           schema:
+ *             type: object
+ *             properties:
+ *               placa:
+ *                 type: string
+ *               modelo:
+ *                 type: string
+ *               clienteId:
+ *                 type: integer
  *     responses:
  *       200:
  *         description: Dados do carro cadastrado.
@@ -52,20 +64,47 @@ router.post("/carro", new CarroController().Cadastrarcarro);
 
 /**
  * @swagger
- * /AlterarCarro:
+ * /Carro/{id}:
  *   put:
  *     summary: Altera dados de um carro.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID do carro a ser alterado.
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           example:
+ *             placa: cde-4567
+ *             modelo: Fusca
+ *           schema:
+ *             type: object
+ *             properties:
+ *               placa:
+ *                 type: string
+ *               modelo:
+ *                 type: string
  *     responses:
  *       200:
- *         description: Alterado com sucesso!
+ *         description: Carro alterado com sucesso.
  */
 router.put("/carro/:id", new CarroController().Alterarcarro);
 
 /**
  * @swagger
- * /DeletarCarro:
+ * /Carro/{id}:
  *   delete:
  *     summary: Deleta um carro.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID do carro a ser deletado
  *     responses:
  *       200:
  *         description: Deletado com sucesso.

@@ -41,7 +41,7 @@ export class CarroController {
                     carro = await carroBD.cadastrar(carro);
 
                     return response.status(200).json({
-                        message: "Produto cadastrado",
+                        message: "Carro cadastrado",
                         data: carro
                     });
                 } 
@@ -80,11 +80,11 @@ export class CarroController {
 
         if (!carro) {
             return response.status(200).json({
-                mensagem: "Nenhum produto encontrado"
+                mensagem: "Nenhum veículo encontrado"
             });
         }
         return response.status(200).json({
-            message: "Produto excluido com sucesso",
+            message: "Veículo excluído com sucesso",
             data: carro
         });
     }
