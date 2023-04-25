@@ -12,6 +12,7 @@ npm i axios
 Dependencias desemvolvedor
 npm i tsx -D
 npm i prisma -D
+npm install @prisma/client
 npm i typescript -D
 npm i @types/express -D
 

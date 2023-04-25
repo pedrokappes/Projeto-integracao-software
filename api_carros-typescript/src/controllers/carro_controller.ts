@@ -2,12 +2,29 @@ import { Response, Request } from 'express';
 import { CarroBD } from '../data/carros_repository';
 import { Carro } from '../models/carro.models';
 import { AxiosCliente } from '../axiosCliente/axiosCliente';
+import axios from 'axios';
 
 const carroBD = new CarroBD();
 
 export class CarroController {
     async paginaInicial(request: Request, response: Response) {
         response.json('Pagina inicial');
+    }
+
+    async ConsultarPlaca (request: Request, response: Response){
+        const placa = request.params.placa;
+
+        try{
+            const { data } = await axios.get('https://placaconsultar.com.br/${placa}')
+            response.status(200).json({
+                message: "Consulta realizada com sucesso",
+                data
+            });
+        }catch(error) {
+            response.status(400).json({
+                message: "Erro ao realizar a consulta",
+            })
+        }
     }
 
     async Listarcarros(request: Request, response: Response) {

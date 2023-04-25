@@ -134,4 +134,6 @@ router.get("/vaga", new ServicoController().Verificarvaga);
 router.get("/preco", new ServicoController().Calcularpreco);
 
 
+
+
 export { router };
