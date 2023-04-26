@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { Request, Response } from "express";
 import { CarroController } from "../controllers/carro_controller";
 import { ServicoController } from "../controllers/servicos_controller";
 
@@ -120,7 +119,13 @@ router.delete("/carro/:id", new CarroController().Deletarcarro);
  *       200:
  *         description: Lista das vagas.
  */
-router.get("/vaga", new ServicoController().Verificarvaga);
+router.get("/vaga/disponivel", new ServicoController().VagasDisponivel);
+
+router.get("/vaga", new ServicoController().ListarVaga);
+
+router.get("/vaga/cadastrar", new ServicoController().CadastrarVaga);
+
+router.delete("/vaga/:id", new ServicoController().DeletarVaga);
 
 /**
  * @swagger

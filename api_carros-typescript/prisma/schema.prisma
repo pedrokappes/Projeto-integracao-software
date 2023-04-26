@@ -16,3 +16,9 @@ model Carro {
         modelo String
         clienteId Int
 }
+
+model Vaga {
+    id Int @id @default(autoincrement())
+    vazia Boolean
+    carroId Int
+}

@@ -14,7 +14,7 @@ const swaggerOptions = {
       }
     ]
   },
-  apis: ['router/carros_router.ts']
+  apis: ['src/router/carros_router.ts']
 };
 
 const swaggerSpec = swaggerJSDoc(swaggerOptions);

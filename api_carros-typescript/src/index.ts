@@ -12,7 +12,6 @@ npm i axios
 Dependencias desemvolvedor
 npm i tsx -D
 npm i prisma -D
-npm install @prisma/client
 npm i typescript -D
 npm i @types/express -D
 
@@ -34,16 +33,15 @@ npx prisma studio
 
 A fazer
 
-prioridades:
-1- Calcular preco -> Maicon
-2- Verificar vagas -> Maicon
-3- Api externa, achar placa de carro ou cep -> Pedro
-4- Tratamento de erros nas requisições e alteração nas mensagens (atualmente só retorna cód 200) -> SE POSSÍVEL
+1-verificar campos POST swagger -> matheus
+2-Calcular preco -> Maicon
+3-Verificar vagas -> Maicon
+4-Api externa, achar placa de carro -> Pedro
 */
 
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from '../swaggerOptions';
-import express, { Router } from "express";
+import express from "express";
 import { router } from "./router/carros_router"
 const app = express();
 const port = 3000; 

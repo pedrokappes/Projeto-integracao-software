@@ -5,3 +5,10 @@ CREATE TABLE "Carro" (
     "modelo" TEXT NOT NULL,
     "clienteId" INTEGER NOT NULL
 );
+
+-- CreateTable
+CREATE TABLE "Vaga" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "vazia" BOOLEAN NOT NULL,
+    "carroId" INTEGER NOT NULL
+);

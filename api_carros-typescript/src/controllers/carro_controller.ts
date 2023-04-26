@@ -18,7 +18,6 @@ export class CarroController {
             const { data } = await axios.get('https://placaconsultar.com.br/${placa}')
             response.status(200).json({
                 message: "Consulta realizada com sucesso",
-                data
             });
         }catch(error) {
             response.status(400).json({
