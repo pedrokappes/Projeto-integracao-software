@@ -132,14 +132,14 @@ router.post("/vaga", new ServicoController().EntradaCarro);
 
 /**
  * @swagger
- * /CalcularPreço:
+ * /SaidaVeiculos:
  *   get:
  *     summary: Realiza o cálculo do preço a ser pago.
  *     responses:
  *       200:
  *         description: Resultado da conta.
  */
-router.get("/preco", new ServicoController().Calcularpreco);
+router.get("/saidaVeiculos/:id/:saida", new ServicoController().SaidaVeiculo);
 
 
 
