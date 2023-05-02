@@ -2,16 +2,15 @@ import { Response } from 'express';
 import { Request } from 'express';
 import { Vaga } from '../models/vaga.models';
 import { VagaDB } from '../data/vaga_repository';
+import { CarroBD } from '../data/carros_repository';
 
 const vagaDB = new VagaDB();
+const carroDB = new CarroBD();
 
 export class ServicoController {
 
     async CadastrarVaga(request: Request, response: Response) {
-        let vaga: Vaga = {
-            vazia: true
-        }
-        const vagas = await vagaDB.cadastrar(vaga);
+        const vagas = await vagaDB.cadastrar();
 
         return response.status(200).json({
             message: "Vaga cadastrada",
@@ -21,13 +20,22 @@ export class ServicoController {
     }
 
     async DeletarVaga(request: Request, response: Response) {
-        const vaga = await vagaDB.deletar(parseInt(request.params.id));
+        let vaga: Vaga | null = await vagaDB.buscar(parseInt(request.params.id));
 
         if (!vaga) {
             return response.status(200).json({
                 mensagem: "Nenhum vaga encontrado"
             });
         }
+
+        if(vaga.carroId != 0){
+            return response.status(200).json({
+                mensagem: "Vaga não pode ser excluida, possui um carro"
+            });
+        }
+        vaga = await vagaDB.deletar(parseInt(request.params.id));
+
+        
         return response.status(200).json({
             message: "Vaga excluído com sucesso",
             data: vaga
@@ -36,7 +44,7 @@ export class ServicoController {
     }
 
     async ListarVaga(request: Request, response: Response) {
-        const vaga = await vagaDB.listar();
+        const vaga: Vaga[] = await vagaDB.listar();
         response.json(vaga).status(200);
 
     }
@@ -44,6 +52,40 @@ export class ServicoController {
     async VagasDisponivel(request: Request, response: Response){
         const vaga = await vagaDB.vagasDisponivel();
         response.json(vaga).status(200);
+    }
+
+    async EntradaCarro(request: Request, response: Response){
+        const entradaCarro = request.body;
+        const carro = await carroDB.buscar(parseInt(entradaCarro.carroId));
+        if(!carro){
+            return response.status(200).json({
+                message:"Verifique o id do carro"
+            });
+        }
+        let vaga: Vaga | null = await vagaDB.buscar(parseInt(entradaCarro.vagaId))
+        if(!vaga){
+            return response.status(200).json({
+                message:"Verifique o id da vaga"
+            });
+        }
+        if(vaga?.carroId != 0){
+            return response.status(200).json({
+                message:"Vaga ja possui um carro"
+            });
+        }
+
+        vaga = await vagaDB.atualizar(entradaCarro)
+        if(vaga?.carroId != 0){
+            return response.status(200).json({
+                message:"Entradada com sucesso",
+                data: vaga
+            });
+        }
+
+        return response.status(200).json({
+            message:"Erro ao dar entrada de veiculo"
+        });
+
     }
 
     async Calcularpreco(request: Request, response: Response) {

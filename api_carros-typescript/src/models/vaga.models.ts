@@ -1,5 +1,7 @@
 export interface Vaga {
     id?: number,
-    vazia: true,
-    carroId?: number
+    vazia: boolean,
+    carroId?: number,
+    horaEntrada: number,
+    horaSaida: number;
 }

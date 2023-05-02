@@ -127,6 +127,9 @@ router.get("/vaga/cadastrar", new ServicoController().CadastrarVaga);
 
 router.delete("/vaga/:id", new ServicoController().DeletarVaga);
 
+router.post("/vaga", new ServicoController().EntradaCarro);
+
+
 /**
  * @swagger
  * /CalcularPreço:

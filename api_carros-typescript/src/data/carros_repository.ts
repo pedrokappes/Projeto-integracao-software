@@ -58,7 +58,7 @@ export class CarroBD {
                     data: {
                         placa: carro.placa,
                         modelo: carro.modelo,
-                       // clienteId: carro.cliente.id
+                        clienteId: carro.clienteId
                     }
                 }
             )
