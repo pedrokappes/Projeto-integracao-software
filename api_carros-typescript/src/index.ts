@@ -33,10 +33,9 @@ npx prisma studio
 
 A fazer
 
-1-verificar campos POST swagger -> matheus
-2-Calcular preco -> Maicon
-3-Verificar vagas -> Maicon
-4-Api externa, achar placa de carro -> Pedro
+1-verificar swagger para as rotas novas -> matheus
+2-Api externa, achar placa de carro -> Pedro
+3-Tipo data na entrada e saida de veiculos
 */
 
 import swaggerUi from 'swagger-ui-express';

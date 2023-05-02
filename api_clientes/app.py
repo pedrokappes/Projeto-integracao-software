@@ -8,13 +8,17 @@ app.py
 
 Falta fazer
 
-1-Axios link externo -> Se não conseguir de placa de carro
-2-Swagger -> Se der tempo
-3-Adcionar um banco de dados -> Se der tempo
-4-Validação de campos de cadastrar -> Se der tempo
+1-Formatar para mvc
+2-Axios link externo -> Se não conseguir de placa de carro
+3-Swagger -> Se der tempo
+4-Adcionar um banco de dados -> Se der tempo
+5-Validação de campos de cadastrar -> Se der tempo
 
-
-
+Cadastrar cliente
+{
+		"nome": "Carlos",
+		"cpf": "001.001.001-25"
+}
 """
 from flask import Flask, request
 from db.cliente_db import Banco
