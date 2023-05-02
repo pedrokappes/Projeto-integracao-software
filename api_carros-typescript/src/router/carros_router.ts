@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { CarroController } from "../controllers/carro_controller";
 import { ServicoController } from "../controllers/servicos_controller";
+import { PlacaExternaController } from "../controllers/placa_externa_controller";
 
 const router: Router = Router();
 router.get("/", new CarroController().paginaInicial);
@@ -142,6 +143,6 @@ router.post("/vaga", new ServicoController().EntradaCarro);
 router.get("/saidaVeiculos/:id/:saida", new ServicoController().SaidaVeiculo);
 
 
-
+router.get("/placaexterna/:placa", new PlacaExternaController().testar);
 
 export { router };

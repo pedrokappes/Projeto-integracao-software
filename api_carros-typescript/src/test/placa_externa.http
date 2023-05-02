@@ -1,0 +1,2 @@
+### Buscar placa 
+GET http://localhost:3000/placaexterna/RHB5J96
