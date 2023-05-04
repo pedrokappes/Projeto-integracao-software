@@ -13,7 +13,7 @@ export class ServicoController {
     async CadastrarVaga(request: Request, response: Response) {
         const vagas = await vagaDB.cadastrar();
 
-        return response.status(200).json({
+        return response.status(201).json({
             message: "Vaga cadastrada",
             data: vagas
         });
@@ -24,20 +24,20 @@ export class ServicoController {
         let vaga: Vaga | null = await vagaDB.buscar(parseInt(request.params.id));
 
         if (!vaga) {
-            return response.status(200).json({
+            return response.status(404).json({
                 mensagem: "Nenhum vaga encontrado"
             });
         }
 
         if (vaga.carroId != 0) {
-            return response.status(200).json({
+            return response.status(400).json({
                 mensagem: "Vaga não pode ser excluida, possui um carro"
             });
         }
         vaga = await vagaDB.deletar(parseInt(request.params.id));
 
 
-        return response.status(200).json({
+        return response.status(201).json({
             message: "Vaga excluído com sucesso",
             data: vaga
         });
@@ -46,7 +46,7 @@ export class ServicoController {
 
     async ListarVaga(request: Request, response: Response) {
         const vaga: Vaga[] = await vagaDB.listar();
-        response.json(vaga).status(200);
+        response.json(vaga).status(201);
 
     }
 
@@ -60,31 +60,31 @@ export class ServicoController {
         entradaCarro.vazia = false;
         const carro = await carroDB.buscar(parseInt(entradaCarro.carroId));
         if (!carro) {
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Verifique o id do carro"
             });
         }
         let vaga: Vaga | null = await vagaDB.buscar(parseInt(entradaCarro.id))
         if (!vaga) {
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Verifique o id da vaga"
             });
         }
         if (vaga?.carroId != 0) {
-            return response.status(200).json({
+            return response.status(400).json({
                 message: "Vaga ja possui um carro"
             });
         }
 
         vaga = await vagaDB.atualizar(entradaCarro)
         if (vaga?.carroId != 0) {
-            return response.status(200).json({
+            return response.status(201).json({
                 message: "Entradada com sucesso",
                 data: vaga
             });
         }
 
-        return response.status(200).json({
+        return response.status(404).json({
             message: "Erro ao dar entrada de veiculo"
         });
 
@@ -94,12 +94,12 @@ export class ServicoController {
         const vaga = await vagaDB.buscar(parseInt(request.params.id));
 
         if(!vaga){
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Favor verifique o numero da vaga"
             })
         }
         if(vaga.carroId == 0){
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Não possui nenhum carro nessa vaga"
             })
         }
@@ -117,7 +117,7 @@ export class ServicoController {
         }
         await vagaDB.atualizar(vagaVazia);
 
-        return response.status(200).json({
+        return response.status(201).json({
             message: "Saida realizada com sucesso",
             data: vaga,
             "Valor a pagar": `R$:${valorPagar.toFixed(2)}`
@@ -129,7 +129,7 @@ export class ServicoController {
     async ConsultaFipe(request: Request, response: Response){
         const carro = await carroDB.buscar(parseInt(request.params.id));
         if (!carro) {
-            return response.status(200).json({
+            return response.status(400).json({
                 message: "Verifique o id do carro"
             });
         }
@@ -141,14 +141,9 @@ export class ServicoController {
             })
         })
         .catch( () => {
-            return response.status(200).json({
+            return response.status(400).json({
                 message: "Verifique o se está correto o codigo da fipe."
             })
         })
-
-        
-
     }
-
-
 }

@@ -20,7 +20,7 @@ export class CarroController {
         const carro = await carroBD.buscar(parseInt(request.params.id))
 
         if (!carro) {
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Carro não encontrado"
             });
         }
@@ -41,19 +41,19 @@ export class CarroController {
                 if (mensagem === "OK") {
                     carro = await carroBD.cadastrar(carro);
 
-                    return response.status(200).json({
+                    return response.status(201).json({
                         message: "Carro cadastrado",
                         data: carro
                     });
                 } 
             }
-            return response.status(200).json({
+            return response.status(400).json({
                 message: "Verifique a Api/Id de cliente(s)",
             });
 
         }
         else {
-            return response.status(200).json({
+            return response.status(400).json({
                 message: "Favor informe o id do cliente"
             });
         }
@@ -65,7 +65,7 @@ export class CarroController {
         const carroAtualizado = await carroBD.atualizar(carro);
 
         if (!carroAtualizado) {
-            return response.status(200).json({
+            return response.status(404).json({
                 message: "Carro não encontrado"
             });
         } else {
@@ -80,11 +80,11 @@ export class CarroController {
         const carro = await carroBD.deletar(parseInt(request.params.id));
 
         if (!carro) {
-            return response.status(200).json({
+            return response.status(404).json({
                 mensagem: "Nenhum veículo encontrado"
             });
         }
-        return response.status(200).json({
+        return response.status(201).json({
             message: "Veículo excluído com sucesso",
             data: carro
         });

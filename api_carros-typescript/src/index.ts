@@ -9,7 +9,7 @@ Dependencias
 npm i express
 npm i axios
 
-Dependencias desemvolvedor
+Dependencias desenvolvedor
 npm i tsx -D
 npm i prisma -D
 npm i typescript -D
