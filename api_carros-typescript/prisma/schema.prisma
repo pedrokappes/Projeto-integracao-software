@@ -15,6 +15,7 @@ model Carro {
         placa String
         modelo String
         clienteId Int
+        codigoFipe String
 }
 
 model Vaga {

@@ -9,10 +9,7 @@ app.py
 Falta fazer
 
 1-Formatar para mvc
-2-Axios link externo -> Se não conseguir de placa de carro
-3-Swagger -> Se der tempo
-4-Adcionar um banco de dados -> Se der tempo
-5-Validação de campos de cadastrar -> Se der tempo
+2-Validação de campos de cadastrar
 
 Cadastrar cliente
 {
@@ -36,12 +33,12 @@ def index():
 #Listar Clientes
 @app.route("/cliente")
 def listar():
-    return banco.listar() ,200
+    return banco.listar(),200
 
 #Buscar cliente ID
 @app.route("/cliente/<int:id>")
 def buscar(id):
-    return banco.buscar(id), 200
+    return banco.buscar(id),200
 
 #Cadastrar cliente
 @app.route("/cliente", methods=["POST"])

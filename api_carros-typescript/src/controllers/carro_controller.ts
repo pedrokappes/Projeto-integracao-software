@@ -11,21 +11,6 @@ export class CarroController {
         response.json('Pagina inicial');
     }
 
-    // async ConsultarPlaca (request: Request, response: Response){
-    //     const placa = request.params.placa;
-
-    //     try{
-    //         const { data } = await axios.get('https://placaconsultar.com.br/${placa}')
-    //         response.status(200).json({
-    //             message: "Consulta realizada com sucesso",
-    //         });
-    //     }catch(error) {
-    //         response.status(400).json({
-    //             message: "Erro ao realizar a consulta",
-    //         })
-    //     }
-    // }
-
     async Listarcarros(request: Request, response: Response) {
         const carroLista = await carroBD.listar();
         response.json(carroLista).status(200);

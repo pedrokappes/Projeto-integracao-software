@@ -4,4 +4,5 @@ export interface Carro {
     placa: string,
     modelo: string,
     clienteId: number;
+    codigoFipe: string
 }

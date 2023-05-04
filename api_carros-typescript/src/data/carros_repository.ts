@@ -43,7 +43,8 @@ export class CarroBD {
                 data: {
                     placa: carro.placa,
                     modelo: carro.modelo,
-                    clienteId: carro.clienteId
+                    clienteId: carro.clienteId,
+                    codigoFipe: carro.codigoFipe
                 }
             })
             return carro;
@@ -58,7 +59,8 @@ export class CarroBD {
                     data: {
                         placa: carro.placa,
                         modelo: carro.modelo,
-                        clienteId: carro.clienteId
+                        clienteId: carro.clienteId,
+                        codigoFipe: carro.codigoFipe
                     }
                 }
             )

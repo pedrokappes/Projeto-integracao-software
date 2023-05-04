@@ -3,6 +3,7 @@ import { Request } from 'express';
 import { Vaga } from '../models/vaga.models';
 import { VagaDB } from '../data/vaga_repository';
 import { CarroBD } from '../data/carros_repository';
+import axios from 'axios';
 
 const vagaDB = new VagaDB();
 const carroDB = new CarroBD();
@@ -125,6 +126,29 @@ export class ServicoController {
 
     }
 
+    async ConsultaFipe(request: Request, response: Response){
+        const carro = await carroDB.buscar(parseInt(request.params.id));
+        if (!carro) {
+            return response.status(200).json({
+                message: "Verifique o id do carro"
+            });
+        }
+
+        await axios.get(`https://brasilapi.com.br/api/fipe/preco/v1/${carro.codigoFipe}`)
+        .then( (sucesso) => {
+            return response.status(200).json({
+                Fipe: sucesso.data[1]
+            })
+        })
+        .catch( () => {
+            return response.status(200).json({
+                message: "Verifique o se está correto o codigo da fipe."
+            })
+        })
+
+        
+
+    }
 
 
 }

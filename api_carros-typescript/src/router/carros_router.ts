@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { CarroController } from "../controllers/carro_controller";
 import { ServicoController } from "../controllers/servicos_controller";
-import { PlacaExternaController } from "../controllers/placa_externa_controller";
 
 const router: Router = Router();
 router.get("/", new CarroController().paginaInicial);
@@ -122,8 +121,24 @@ router.delete("/carro/:id", new CarroController().Deletarcarro);
  */
 router.get("/vaga/disponivel", new ServicoController().VagasDisponivel);
 
+/**
+ * @swagger
+ * /ListarVaga:
+ *   get:
+ *     summary: Apresenta todas as vagas
+ *     responses:
+ *       200
+ */
 router.get("/vaga", new ServicoController().ListarVaga);
 
+/**
+ * @swagger
+ * /CadastrarVaga:
+ *   get:
+ *     summary: Cadastra novas vagas
+ *     responses:
+ *       200
+ */
 router.get("/vaga/cadastrar", new ServicoController().CadastrarVaga);
 
 router.delete("/vaga/:id", new ServicoController().DeletarVaga);
@@ -142,7 +157,14 @@ router.post("/vaga", new ServicoController().EntradaCarro);
  */
 router.get("/saidaVeiculos/:id/:saida", new ServicoController().SaidaVeiculo);
 
-
-router.get("/placaexterna/:placa", new PlacaExternaController().testar);
+/**
+ * @swagger
+ * /ConsultarFipe:
+ *   get:
+ *     summary: Apresenta dados do veiculo, pelo codigo fipe
+ *     responses:
+ *       200
+ */
+router.get("/consultaFipe/:id", new ServicoController().ConsultaFipe)
 
 export { router };
