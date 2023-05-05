@@ -46,6 +46,7 @@ router.get("/carro/:id", new CarroController().Buscarcarro);
  *             placa: abc-12345
  *             modelo: Uno
  *             clienteId: 1
+ *             codigoFipe: 01235-8
  *           schema:
  *             type: object
  *             properties:
@@ -55,6 +56,10 @@ router.get("/carro/:id", new CarroController().Buscarcarro);
  *                 type: string
  *               clienteId:
  *                 type: integer
+ *               codigoFipe:
+ *                 type: string
+ *              
+ *              
  *     responses:
  *       200:
  *         description: Dados do carro cadastrado.
@@ -79,6 +84,7 @@ router.post("/carro", new CarroController().Cadastrarcarro);
  *           example:
  *             placa: cde-4567
  *             modelo: Fusca
+ *             codigoFipe: 004217-0
  *           schema:
  *             type: object
  *             properties:
@@ -86,6 +92,9 @@ router.post("/carro", new CarroController().Cadastrarcarro);
  *                 type: string
  *               modelo:
  *                 type: string
+ *               codigoFipe:
+ *                 type: string
+ *              
  *     responses:
  *       200:
  *         description: Carro alterado com sucesso.
@@ -112,58 +121,128 @@ router.delete("/carro/:id", new CarroController().Deletarcarro);
 
 /**
  * @swagger
- * /VerificarDisponibilidade:
+ * /vaga/disponivel:
  *   get:
- *     summary: Verifica as vagas disponiveis.
+ *     summary: Verifica a quantidade de vagas disponiveis.
  *     responses:
  *       200:
- *         description: Lista das vagas.
+ *         description: quantidade disponível das vagas.
  */
 router.get("/vaga/disponivel", new ServicoController().VagasDisponivel);
 
 /**
  * @swagger
- * /ListarVaga:
+ * /Vaga:
  *   get:
- *     summary: Apresenta todas as vagas
+ *     summary: Lista e Apresenta todas as vagas e seus respectivos atributos.
  *     responses:
- *       200
+ *         200:
+ *         description: quantidade disponível das vagas.
  */
 router.get("/vaga", new ServicoController().ListarVaga);
 
 /**
  * @swagger
- * /CadastrarVaga:
+ * /Vaga/Cadastrar:
  *   get:
- *     summary: Cadastra novas vagas
+ *     summary: Gera uma nova vaga e cadastra no sistema.
  *     responses:
  *       200
  */
 router.get("/vaga/cadastrar", new ServicoController().CadastrarVaga);
 
+
+/**
+ * @swagger
+ * /Vaga/{id}:
+ *   delete:
+ *     summary: Deleta uma vaga.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID da vaga a ser deletada
+ *     responses:
+ *       200:
+ *         description: Deletada com sucesso.
+ */
 router.delete("/vaga/:id", new ServicoController().DeletarVaga);
+
+/**
+* @swagger
+* /Vaga:
+*   post:
+*     summary: Dá entrada de um carrro em uma determinada vaga.
+*     requestBody:
+*       content:
+*         application/json:
+*           example:
+*             id: 15
+*             carroId: 5
+*             horaEntrada: 12
+*             horaSaida: 0
+*           schema:
+*             type: object
+*             properties:
+*               id:
+*                 type: integer
+*               carroId:
+*                 type: integer
+*               horaEntrada:
+*                 type: integer        
+*               horaSaida:
+*                 type: integer          
+*              
+*     responses:
+*       200:
+*         description:  O horário de entrada deve ser escrito com número (exemplo 12h = 12).
+*/
 
 router.post("/vaga", new ServicoController().EntradaCarro);
 
 
 /**
  * @swagger
- * /SaidaVeiculos:
+ * /SaidaVeiculos/{id}/{saida}:
  *   get:
- *     summary: Realiza o cálculo do preço a ser pago.
+ *     summary: Define o horário de saída de um veículo baseado no ID da vaga.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true 
+ *         description: ID da vaga a ser usada.
+ *       - in: path
+ *         name: saida
+ *         schema:
+ *           type: number
+ *           format: float
+ *         required: true
+ *         description: Escreva o horário de saída do veículo.
  *     responses:
  *       200:
- *         description: Resultado da conta.
+ *         description: O horário de saída deve ser escrito com número (exemplo 17h = 17).
  */
 router.get("/saidaVeiculos/:id/:saida", new ServicoController().SaidaVeiculo);
 
 /**
  * @swagger
- * /ConsultarFipe:
+ * /ConsultaFipe/{id}:
  *   get:
- *     summary: Apresenta dados do veiculo, pelo codigo fipe
+ *     summary: Retorna os dados detalhados do carro baseado no código Fipe.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID do carro a ser retornado.
  *     responses:
- *       200
+ *       200:
+ *         description: Informações encontradas com código Fipe.
  */
 router.get("/consultaFipe/:id", new ServicoController().ConsultaFipe)
 

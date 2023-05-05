@@ -25,7 +25,7 @@ export class ServicoController {
 
         if (!vaga) {
             return response.status(404).json({
-                mensagem: "Nenhum vaga encontrado"
+                mensagem: "Nenhuma vaga encontrada"
             });
         }
 
@@ -38,7 +38,7 @@ export class ServicoController {
 
 
         return response.status(201).json({
-            message: "Vaga excluído com sucesso",
+            message: "Vaga excluída com sucesso",
             data: vaga
         });
 
@@ -79,7 +79,7 @@ export class ServicoController {
         vaga = await vagaDB.atualizar(entradaCarro)
         if (vaga?.carroId != 0) {
             return response.status(201).json({
-                message: "Entradada com sucesso",
+                message: "Entrada dada com sucesso",
                 data: vaga
             });
         }
@@ -100,7 +100,7 @@ export class ServicoController {
         }
         if(vaga.carroId == 0){
             return response.status(404).json({
-                message: "Não possui nenhum carro nessa vaga"
+                message: "Não há nenhum carro nessa vaga"
             })
         }
 
