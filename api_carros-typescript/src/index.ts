@@ -31,13 +31,6 @@ Inciar o prisma
 npx prisma studio
 
 
-A fazer
-
-1-verificar swagger para as rotas novas -> matheus
-2-Tipo data na entrada e saida de veiculos
-3-Codigo de status
-*/
-
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from '../swaggerOptions';
 import express from "express";
