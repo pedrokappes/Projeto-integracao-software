@@ -5,12 +5,6 @@ pip install Flask
 Criar arquivo
 app.py
 
-
-Falta fazer
-
-1-Formatar para mvc
-2-Validação de campos de cadastrar
-
 Cadastrar cliente
 {
 		"nome": "Carlos",
