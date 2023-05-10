@@ -16,6 +16,7 @@ npm i typescript -D
 npm i @types/express -D
 
 
+
 npm install swagger-jsdoc swagger-ui-express
 
 
@@ -30,7 +31,7 @@ npx prisma migrate dev --name init
 Inciar o prisma
 npx prisma studio
 
-
+*/
 import swaggerUi from 'swagger-ui-express';
 import { swaggerSpec } from '../swaggerOptions';
 import express from "express";
