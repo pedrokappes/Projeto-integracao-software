@@ -22,16 +22,17 @@ export class CarroBD {
                     }
                 }
             )
-            const axiosCliente = new AxiosCliente()
-            const {mensagem, cliente} = await axiosCliente.buscar(carro)
-            if (mensagem && cliente && carro != null) {
-                if (mensagem === "OK") {
-                    const carroCliente:CarroCliente = carro
-                    carroCliente.cliente = cliente;
-                    return carroCliente
-                } 
-            }
-            return null
+            console.log(carro);
+            // const axiosCliente = new AxiosCliente()
+            // const {mensagem, cliente} = await axiosCliente.buscar(carro)
+            // if (mensagem && cliente && carro != null) {
+            //     if (mensagem === "OK") {
+            //         const carroCliente:CarroCliente = carro
+            //         carroCliente.cliente = cliente;
+            //         return carroCliente
+            //     } 
+            // }
+            return carro
         }
         catch {
             return null

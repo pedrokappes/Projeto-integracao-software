@@ -10,6 +10,9 @@ Cadastrar cliente
 		"nome": "Carlos",
 		"cpf": "001.001.001-25"
 }
+
+comando para abrir o docker
+docker run --rm -it -p 8080:15672 -p 5672:5672 rabbitmq:3-management
 """
 import sqlite3
 from flask import Flask, jsonify, request
@@ -28,6 +31,8 @@ if __name__ == '__main__':
     subprocess.Popen(['python', 'cadastrar_cliente.py'])
     subprocess.Popen(['python', 'alterar_cliente.py'])
     subprocess.Popen(['python', 'excluir_cliente.py'])
+    subprocess.Popen(['python', 'enviar_clientes.py'])
+
     
     # Iniciar o microsserviço atual
     app.run()
