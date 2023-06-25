@@ -1,8 +1,5 @@
 import express from "express";
-import amqp from "amqplib";
-import { Carro } from "../../model/carro_model";
 import { PrismaClient } from "@prisma/client";
-import { Vaga } from "../../model/vaga_model";
 
 
 
@@ -46,7 +43,6 @@ app.post("/entradaVeiculo", async (req, res) => {
             message: "Vaga ja possui um carro"
         });
     }
-    console.log(vaga)
 
     vaga = await prisma.vaga.update(
         {

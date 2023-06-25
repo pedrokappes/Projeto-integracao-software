@@ -18,13 +18,6 @@
     "deletarVaga": "npx tsx watch microservices/deletar_vaga/deletar_vaga.ts",
     "entradaCarro": "npx tsx watch microservices/entrada_carro/entrada_carro.ts",
     "saidaCarro": "npx tsx watch microservices/saida_carro/saida_carro.ts"
-
-
-
-
-
-
-
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +25,7 @@
     "amqplib": "^0.10.3",
     "axios": "^1.4.0",
     "express": "^4.18.2",
+    "kafka-node": "^5.0.0",
     "prisma": "^4.16.1"
   },
   "devDependencies": {

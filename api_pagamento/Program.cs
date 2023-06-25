@@ -1,36 +1,31 @@
-﻿using System.Text;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+﻿using System;
+using Confluent.Kafka;
+using System.Text;
 
-Console.WriteLine(" ---- CONSUMIDOR ----");
-
-ConnectionFactory factory = new ConnectionFactory
+class Program
 {
-    HostName = "localhost"
-};
-
-using (var connection = factory.CreateConnection())
-{
-    using (var channel = connection.CreateModel())
+    static void Main(string[] args)
     {
-        ConsumirFila(channel, "carro_queue", ConsoleColor.Blue);
-        Console.ReadLine();
+        Console.WriteLine(" ---- CONSUMIDOR ----");
+
+        var config = new ConsumerConfig
+        {
+            BootstrapServers = "localhost:9092",
+            GroupId = "carro_group",
+            AutoOffsetReset = AutoOffsetReset.Earliest
+        };
+
+        using (var consumer = new ConsumerBuilder<Ignore, string>(config).Build())
+        {
+            consumer.Subscribe("carro_topic");
+
+            while (true)
+            {
+                var consumeResult = consumer.Consume();
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine(consumeResult.Message.Value);
+            }
+        }
     }
-}
-
-void ConsumirFila(IModel channel, string fila, ConsoleColor cor)
-{
-    var consumer = new EventingBasicConsumer(channel);
-    consumer.Received += (model, message) =>
-    {
-        var body = message.Body.ToArray();
-        var mensagem = Encoding.UTF8.GetString(body);
-        Console.ForegroundColor = cor;
-        Console.WriteLine(mensagem);
-    };
-    channel.BasicConsume(
-        queue: fila,
-        autoAck: true,
-        consumer: consumer
-    );
 }

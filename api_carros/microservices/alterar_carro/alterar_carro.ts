@@ -1,5 +1,4 @@
 import express from "express";
-import amqp from "amqplib";
 import { Carro } from "../../model/carro_model";
 import { PrismaClient } from "@prisma/client";
 
