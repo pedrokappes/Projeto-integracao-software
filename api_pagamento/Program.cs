@@ -22,9 +22,6 @@ class Program
             while (true)
             {
                 var consumeResult = consumer.Consume();
-
-                Console.ForegroundColor = ConsoleColor.Blue;
-                Console.WriteLine(consumeResult.Message.Value);
             }
         }
     }

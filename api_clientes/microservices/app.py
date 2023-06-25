@@ -1,18 +1,23 @@
 """
-Comandos para inciar projeto
-pip install Flask
-
-Criar arquivo
-app.py
-
-Cadastrar cliente
-{
-		"nome": "Carlos",
-		"cpf": "001.001.001-25"
-}
-
 comando para abrir o docker
 docker run --rm -it -p 8080:15672 -p 5672:5672 rabbitmq:3-management
+
+comando para rodar servidor do kafka
+
+.\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+
+Comando para inicar as aplicações
+
+Aplicativo de python
+    python app.py
+
+Aplicativo em typescript
+    npm run start
+
+Aplicativo em C#
+    dotnet watch run
 """
 import sqlite3
 from flask import Flask, jsonify, request

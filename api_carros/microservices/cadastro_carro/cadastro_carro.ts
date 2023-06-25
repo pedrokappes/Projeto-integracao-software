@@ -2,6 +2,8 @@ import express from "express";
 import amqp from "amqplib";
 import { Carro } from "../../model/carro_model";
 import { PrismaClient } from "@prisma/client";
+import swaggerUi from 'swagger-ui-express';
+import  swaggerDocument  from '../../swagger.json';
 
 
 
@@ -11,6 +13,7 @@ const mensagemRecebida: string[] = [];
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
  app.get("/clientes", (req, res)=>{
     const listaDeMensagens = mensagemRecebida.map(string => JSON.parse(string.replace(/'/g, '"')));
 
@@ -74,6 +77,8 @@ app.post("/cadastrar", async (req, res) => {
     });
 
 })
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
     console.log(`Servidor de cadastro de carros na porta ${port}`);
