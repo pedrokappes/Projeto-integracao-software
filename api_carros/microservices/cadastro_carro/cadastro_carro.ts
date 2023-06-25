@@ -70,7 +70,7 @@ app.post("/cadastrar", async (req, res) => {
     })
     return res.status(200).json({
         message: "Carro cadastrado",
-        lista: listaDeMensagens
+        lista: carro
     });
 
 })

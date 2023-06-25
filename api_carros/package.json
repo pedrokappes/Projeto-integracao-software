@@ -18,6 +18,13 @@
     "deletarVaga": "npx tsx watch microservices/deletar_vaga/deletar_vaga.ts",
     "entradaCarro": "npx tsx watch microservices/entrada_carro/entrada_carro.ts",
     "saidaCarro": "npx tsx watch microservices/saida_carro/saida_carro.ts"
+
+
+
+
+
+
+
   },
   "author": "",
   "license": "ISC",
@@ -31,7 +38,6 @@
     "@prisma/client": "^4.16.1",
     "@types/amqplib": "^0.10.1",
     "@types/express": "^4.17.17",
-    "concurrently": "^8.2.0",
     "tsx": "^3.12.7"
   }
 }
