@@ -58,8 +58,6 @@ export class VagaDB {
 
     async atualizar(vaga): Promise<Vaga | null> {
         try {
-            console.log(vaga)
-
             vaga = await prisma.vaga.update(
                 {
                     where: {
@@ -73,7 +71,6 @@ export class VagaDB {
                     }
                 }
             )
-            console.log(vaga)
 
             return vaga
         } catch (error) {

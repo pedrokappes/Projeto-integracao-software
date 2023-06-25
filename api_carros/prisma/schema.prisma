@@ -17,3 +17,11 @@ model Carro {
         clienteId Int
         codigoFipe String
 }
+
+model Vaga {
+    id Int @id @default(autoincrement())
+    vazia Boolean
+    carroId Int
+    horaEntrada Float
+    horaSaida Float
+}
