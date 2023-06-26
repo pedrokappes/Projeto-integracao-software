@@ -1,37 +1,39 @@
 import express from "express";
+import kafka from "kafka-node";
 import { PrismaClient } from "@prisma/client";
 import { Vaga } from "../../model/vaga_model";
-import swaggerUi from "swagger-ui-express";
-import { swaggerSpec } from "../../swaggerOptions";
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from '../../swagger.json';
 
 const app = express();
 const port = 6011;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 /**
  * @swagger
  * /saidaVeiculos/{id}/{saida}:
  *   get:
- *     summary: Registra a saída de um veículo de uma vaga.
+ *     summary: Realiza a saída de um veículo da vaga.
  *     parameters:
- *       - name: id
- *         in: path
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: integer
+ *         required: true
  *         description: ID da vaga.
+ *       - in: path
+ *         name: saida
+ *         schema:
+ *           type: integer
  *         required: true
- *         type: integer
- *       - name: saida
- *         in: path
  *         description: Hora de saída do veículo.
- *         required: true
- *         type: integer
  *     responses:
  *       200:
- *         description: Veículo saiu da vaga com sucesso.
+ *         description: Veículo saiu com sucesso.
  *       404:
- *         description: ID da vaga não encontrado ou não há nenhum carro na vaga.
+ *         description: Vaga não encontrada ou não há nenhum carro na vaga.
  */
 app.get("/saidaVeiculos/:id/:saida", async (req, res) => {
   const prisma = new PrismaClient();
@@ -79,12 +81,39 @@ app.get("/saidaVeiculos/:id/:saida", async (req, res) => {
     }
   });
 
+  const kafkaClient = new kafka.KafkaClient({ kafkaHost: "localhost:9092" });
+  const producer = new kafka.Producer(kafkaClient);
+
+  producer.on("ready", async () => {
+    const payloads = [
+      {
+        topic: "carro_topic",
+        messages: valorPagar.toString()
+      }
+    ];
+
+    producer.send(payloads, (err, data) => {
+      if (err) {
+        console.log("Erro ao enviar mensagem para o Kafka:", err);
+      } else {
+        console.log("Mensagem enviada para o Kafka:", data);
+        producer.close();
+      }
+    });
+  });
+
+  producer.on("error", (err) => {
+    console.log("Erro no produtor do Kafka:", err);
+  });
+
   return res.status(200).json({
     message: "Veiculo saiu",
-    data: vaga,
+    date: vaga,
     apagar: valorPagar
   });
 });
+
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(port, () => {
   console.log(`Servidor de Saida de veiculos na porta ${port}`);
