@@ -9,8 +9,20 @@ const app = express();
 const port = 6000;
 const mensagemRecebida: string[] = [];
 
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+/**
+ * @swagger
+ * /clientes:
+ *   get:
+ *     summary: Retorna a lista de clientes.
+ *     responses:
+ *       200:
+ *         description: Retorna a lista de clientes com sucesso.
+ */
 
 app.get("/clientes", (req, res) => {
   const listaDeMensagens = mensagemRecebida.map((string) =>

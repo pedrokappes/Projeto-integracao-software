@@ -49,7 +49,7 @@ const swaggerOptions = {
       },
     ]
   },
- apis: ['microservices/cadstro_carro/cadastro_carro.ts', 'microservices/listar_carro/listar_carro.ts', 'microservices/deletar_carro/deletar_carro.ts','microservices/buscar_carro/buscar_carro.ts',
+ apis: ['microservices/cadastro_carro/cadastro_carro.ts', 'microservices/listar_carro/listar_carro.ts', 'microservices/deletar_carro/deletar_carro.ts','microservices/buscar_carro/buscar_carro.ts',
  'microservices/consulta_fipe/consulta_fipe.ts','microservices/alterar_carro/alterar_carro.ts', 'microservices/listar_vagas/listar_vagas.ts', 'microservices/cadastrar_vagas/cadastrar_vagas.ts',
  'microservices/verificar_vagas/verificar_vagas.ts', 'microservices/deletar_vaga/deletar_vaga.ts', 'microservices/entrada_carro/entrada_carro.ts',
  'microservices/saida_carro/saida_carro.ts' ]
