@@ -1,14 +1,38 @@
 import express from "express";
-import kafka from "kafka-node";
 import { PrismaClient } from "@prisma/client";
 import { Vaga } from "../../model/vaga_model";
+import swaggerUi from "swagger-ui-express";
+import { swaggerSpec } from "../../swaggerOptions";
 
 const app = express();
 const port = 6011;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+/**
+ * @swagger
+ * /saidaVeiculos/{id}/{saida}:
+ *   get:
+ *     summary: Registra a saída de um veículo de uma vaga.
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: ID da vaga.
+ *         required: true
+ *         type: integer
+ *       - name: saida
+ *         in: path
+ *         description: Hora de saída do veículo.
+ *         required: true
+ *         type: integer
+ *     responses:
+ *       200:
+ *         description: Veículo saiu da vaga com sucesso.
+ *       404:
+ *         description: ID da vaga não encontrado ou não há nenhum carro na vaga.
+ */
 app.get("/saidaVeiculos/:id/:saida", async (req, res) => {
   const prisma = new PrismaClient();
   const id = parseInt(req.params.id);
@@ -55,34 +79,9 @@ app.get("/saidaVeiculos/:id/:saida", async (req, res) => {
     }
   });
 
-  const kafkaClient = new kafka.KafkaClient({ kafkaHost: "localhost:9092" });
-  const producer = new kafka.Producer(kafkaClient);
-
-  producer.on("ready", async () => {
-    const payloads = [
-      {
-        topic: "carro_topic",
-        messages: valorPagar.toString()
-      }
-    ];
-
-    producer.send(payloads, (err, data) => {
-      if (err) {
-        console.log("Erro ao enviar mensagem para o Kafka:", err);
-      } else {
-        console.log("Mensagem enviada para o Kafka:", data);
-        producer.close();
-      }
-    });
-  });
-
-  producer.on("error", (err) => {
-    console.log("Erro no produtor do Kafka:", err);
-  });
-
   return res.status(200).json({
     message: "Veiculo saiu",
-    date: vaga,
+    data: vaga,
     apagar: valorPagar
   });
 });

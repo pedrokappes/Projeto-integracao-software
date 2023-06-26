@@ -22,6 +22,7 @@ class Program
             while (true)
             {
                 var consumeResult = consumer.Consume();
+                Console.WriteLine("Valor a pagar: " + consumeResult.Message.Value);
             }
         }
     }
